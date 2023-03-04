@@ -7,33 +7,37 @@
 // ['1234", "1567", "-2", "computer science"] -> ["-2"]
 // ["Russia", "Denmark", "Kazan"] -> []
 
-string [] mass = {"bido,bido","hahaha","bububu","blablabla","hihihi"};
+
+string [] mass1 = {"bido,bido","hahaha","bububu","blablabla","hihihi"};
+string [] mass2 = new string [mass1.Length];
+Random rnd = new Random();
+int index = rnd.Next(mass1.Length);
+int count = 0;
+
+Console.Write( "Массив: ");
+{
+    for (int i = 0; i < mass1.Length; i++)
+    Console.Write(" " + mass1[i]);
+}
+Console.WriteLine();
 
 {
-    for (int i = 0; i < mass.Length; i++)
+    for (int i = 0; i < mass1.Length; i++)
     {
-        string str = mass [new Random().Next(0,5)];
-        System.Console.Write("|" + str);
-        
-        // if (str[0]==str[1])
-        // for (int i = 1; i < mass.Length; i++);
-        
-
-    //    if (str[0]==str[1])
-    //    for (int i = 1; i < mass.Length; i++)
-    //    str = new string;
-    //    System.Console.Write(str);
-       
-    //    if (str[1]==str[2])
-    //    for (int i = 2; i < mass.Length; i++)
-       
-    //    if (str[2]==str[3])
-    //    for (int i = 3; i < mass.Length; i++)
-
-    //    if (str[3]==str[4])
-    //    for (int i = 4; i < mass.Length; i++)
-
+        if (mass1[i].Length<=3)
+        mass2[count] = mass1[i];
+        count++;
 
     }
-    
+    Console.WriteLine();
 }
+
+for (int i = 0; i < mass1.Length; i++)
+Console.WriteLine(mass2[i]);
+Console.Write("Рандомный массив: ");
+// Console.Write(" | " + mass1[i]); // Сделать вывод
+
+
+
+    
+
