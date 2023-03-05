@@ -1,43 +1,69 @@
-﻿// Задача: Написать программу, которая из имеющегося массива строк формирует массив из строк, длина которых меньше либо равна 3 символа. 
-// Первоначальный массив можно ввести с клавиатуры, либо задать на старте выполнения алгоритма. 
-// При решении не рекомендуется пользоваться коллекциями, лучше обойтись
-// исключительно массивами.
-// Примеры:
-// ["hello", "2", "world", ":-)"] -> ["2", ":-)"]
-// ['1234", "1567", "-2", "computer science"] -> ["-2"]
-// ["Russia", "Denmark", "Kazan"] -> []
+﻿// // Задача: Написать программу, которая из имеющегося массива строк формирует массив из строк, длина которых меньше либо равна 3 символа. 
+// // Первоначальный массив можно ввести с клавиатуры, либо задать на старте выполнения алгоритма. 
+// // При решении не рекомендуется пользоваться коллекциями, лучше обойтись
+// // исключительно массивами.
+// // // Примеры:
+// // // ["hello", "2", "world", ":-)"] -> ["2", ":-)"]
+// // // ['1234", "1567", "-2", "computer science"] -> ["-2"]
+// // // ["Russia", "Denmark", "Kazan"] -> []
 
+string[] workArray = FillArray(); // присвоение переменой функции "ввод массива" 
+string[] resultArray = GenerateNewArray (workArray);// присвоение переменной функции "массив из 3 чисел"
+string firstArray = PrintArray(workArray); // массив 1
+string secondArray = PrintArray(resultArray); // массив 2
+Console.WriteLine(firstArray + " -> " + secondArray);// вывод на консоль
 
-string [] mass1 = {"bido,bido","hahaha","bububu","blablabla","hihihi"};
-string [] mass2 = new string [mass1.Length];
-Random rnd = new Random();
-int index = rnd.Next(mass1.Length);
-int count = 0;
-
-Console.Write( "Массив: ");
+string[] FillArray()//функция для ввода элементов массива  
 {
-    for (int i = 0; i < mass1.Length; i++)
-    Console.Write(" " + mass1[i]);
+    Console.WriteLine("Введите значения через пробел, по окончании нажмите Enter: ");
+    string? enterSymbols = Console.ReadLine();
+    if (enterSymbols == null) { enterSymbols = ""; };
+    char[] separators = new char[] { ',', ' ' };
+    string[] workArray = enterSymbols.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+    return workArray;
 }
-Console.WriteLine();
 
+string PrintArray(string[] workArray) // функция для вывода
 {
-    for (int i = 0; i < mass1.Length; i++)
+    string stringArray = "(";
+    for (int i = 0; i < workArray.Length; i++)
     {
-        if (mass1[i].Length<=3)
-        mass2[count] = mass1[i];
-        count++;
-
+        if (i == workArray.Length - 1)
+        {
+            stringArray += $"\"{workArray[i]}\"";
+            break;
+        }
+        stringArray += ($"\"{workArray[i]}\", ");
     }
-    Console.WriteLine();
+    stringArray += ")";
+    return stringArray;
 }
 
-for (int i = 0; i < mass1.Length; i++)
-Console.WriteLine(mass2[i]);
-Console.Write("Рандомный массив: ");
-// Console.Write(" | " + mass1[i]); // Сделать вывод
+int CountStringSymbols(string[] workArray)// подсчет количества элементов
+{
+    int counter = 0;
+    foreach (string item in workArray)
+    {
+        if (item.Length <= 3)
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
 
-
-
-    
-
+string[] GenerateNewArray(string[] workArray)//генерация нового массива из +-3 элементов
+{
+    int resultArrayLength = CountStringSymbols(workArray);
+    string[] resultArray = new string[resultArrayLength];
+    int i = 0;
+    foreach (string item in workArray)
+    {
+        if (item.Length <= 3)
+        {
+            resultArray[i] = item;
+            i++;
+        }
+    }
+    return resultArray;
+}
